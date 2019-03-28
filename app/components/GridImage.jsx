@@ -42,6 +42,7 @@ class GridImage extends React.Component {
       <li className={`card ${this.props.selected ? 'selected' : ''}`}>
         {this.props.file.isPhoto ? (
           <img
+            draggable="true"
             className="card-image"
             src={thumbnail}
             title={this.props.file.name}
@@ -49,6 +50,7 @@ class GridImage extends React.Component {
           />
         ) : (
           <video
+            draggable="true"
             className="card-image"
             src={thumbnail}
             title={this.props.file.name}

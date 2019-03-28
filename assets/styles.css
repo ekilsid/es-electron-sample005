@@ -16,6 +16,7 @@
 .card {
     /* flex-grow | flex-shrink | flex-basis */
     /* flex: 1 0 32%; */
+    cursor: 'move';
     flex: 0 0 33%;
     border: 1px solid #ccc;
     margin-bottom: 10px; 
@@ -55,3 +56,6 @@
     color: red
 }
 
+.area-drop{
+    cursor: 'crosshair';
+}

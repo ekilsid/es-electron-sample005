@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-import { app, BrowserWindow } from 'electron';
+import { app, ipcMain, BrowserWindow } from 'electron';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -10,13 +10,17 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 600,
     height: 600,
+    // TODO カーソル問題
+    titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
       backgroundThrottling: false,
-      nodeIntegration: true
+      nodeIntegration: true,
+      // navigateOnDragDrop: true
       // webSecurity: false
     }
   });
 
+  console.log('===== start =====');
   // and load the index.html of the app.
   // mainWindow.loadFile('./dist/index.html');
   // mainWindow.loadFile(`file://${__dirname}/index.html`);
@@ -33,6 +37,12 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+
+  mainWindow.on('drop', function() {
+    console.log('addEventListener drop');
+  });
+
 }
 
 // This method will be called when Electron has finished
@@ -59,3 +69,8 @@ app.on('activate', function() {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+ipcMain.on('drop-file', (event, arg) => {
+  console.log(arg)
+  event.sender.send('reply', arg);
+})

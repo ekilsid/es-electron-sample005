@@ -6,6 +6,7 @@ import GridImage from './GridImage';
 import { remote } from 'electron';
 const dialog = remote.dialog;
 const app = remote.app;
+const { ipcRenderer } = window.require('electron');
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -16,11 +17,21 @@ export default class Home extends React.Component {
       path: app.getPath('home'),
       photos: [],
       actives: [],
-      list1: ['aaa', 'bbb', 'ccc'],
+      list1: [],
       list2: ['xxx', 'yyy']
     };
 
     this.handleOnCheckFile = this.handleOnCheckFile.bind(this);
+
+    ipcRenderer.on('reply', (event, arg) => {
+      console.log('reply!!! -> ' + arg);
+      if(this.state.list1.indexOf(arg) == -1){
+        this.setState({
+          list1: this.state.list1.concat([arg])
+        });  
+      }
+    });
+
   }
 
   componentDidMount() {
@@ -114,11 +125,11 @@ export default class Home extends React.Component {
               <ul className="gallery">{GalleryContents}</ul>
             </div>
             <div className="pane-sm sidebar">
-              <nav className="nav-group">
+              <nav id="favorites" className="nav-group area-drop">
                 <h5 className="nav-group-title">Favorites</h5>
                 {List1}
               </nav>
-              <nav className="nav-group">
+              <nav id="checked" className="nav-group area-drop">
                 <h5 className="nav-group-title">Checked</h5>
                 {List2}
               </nav>
