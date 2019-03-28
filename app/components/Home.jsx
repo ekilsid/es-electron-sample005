@@ -110,7 +110,7 @@ export default class Home extends React.Component {
         </header>
         <div className="window-content">
           <div className="pane-group">
-            <div className="pane">
+            <div className="pane" style={{minWidth:'400px'}}>
               <ul className="gallery">{GalleryContents}</ul>
             </div>
             <div className="pane-sm sidebar">

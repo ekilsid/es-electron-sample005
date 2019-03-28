@@ -55,12 +55,13 @@ class GridImage extends React.Component {
             onClick={() => this.onExec(this.props.file)}
           />
         )}
+        <div>
         <FontAwesome
           className={`card-action ${this.props.selected ? 'selected' : ''}`}
           name="check-circle"
-          size="2x"
           onClick={() => this.props.onCheckFile(this.props.file.name)}
         />
+        </div>
       </li>
     );
   }
