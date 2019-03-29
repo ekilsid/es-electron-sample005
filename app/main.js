@@ -11,7 +11,7 @@ function createWindow() {
     width: 600,
     height: 600,
     // TODO カーソル問題
-    titleBarStyle: 'customButtonsOnHover',
+    //titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
       backgroundThrottling: false,
       nodeIntegration: true,

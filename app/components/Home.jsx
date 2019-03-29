@@ -14,9 +14,10 @@ export default class Home extends React.Component {
     console.log('[Top#constructor]');
 
     this.state = {
-      path: app.getPath('home'),
+      //path: app.getPath('home'),
+      path: '/Users/takano/Dev/PicTest',
       photos: [],
-      actives: [],
+      selected: [],
       list1: [],
       list2: ['xxx', 'yyy']
     };
@@ -63,16 +64,16 @@ export default class Home extends React.Component {
 
   handleOnCheckFile(name) {
     console.log(name);
-    let nowActives = this.state.actives;
+    let nowSelected = this.state.selected;
 
-    if (nowActives.indexOf(name) == -1) {
-      nowActives.push(name);
+    if (nowSelected.indexOf(name) == -1) {
+      nowSelected.push(name);
     } else {
-      nowActives.splice(nowActives.indexOf(name), 1);
+      nowSelected.splice(nowSelected.indexOf(name), 1);
     }
 
     this.setState({
-      actives: nowActives
+      selected: nowSelected
     });
   }
 
@@ -85,7 +86,7 @@ export default class Home extends React.Component {
         key={'img' + index}
         onCheckFile={name => this.handleOnCheckFile(name)}
         file={file}
-        selected={this.state.actives.indexOf(file.name) > -1}
+        selected={this.state.selected.indexOf(file.name) > -1}
       />
     ));
 
