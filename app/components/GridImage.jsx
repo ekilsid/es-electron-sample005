@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FontAwesome = require('react-fontawesome');
 const childProcess = window.require('child_process');
@@ -68,5 +69,11 @@ class GridImage extends React.Component {
     );
   }
 }
+
+GridImage.propTypes = {
+  file: PropTypes.object.isRequired,
+  selected: PropTypes.bool.isRequired,
+  onCheckFile: PropTypes.func.isRequired
+};
 
 export default GridImage;

@@ -90,9 +90,9 @@ export default class Home extends React.Component {
     const GalleryContents = this.state.photos.map((file, index) => (
       <GridImage
         key={'img' + index}
-        onCheckFile={name => this.handleOnCheckFile(name)}
         file={file}
         selected={this.state.selected.indexOf(file.name) > -1}
+        onCheckFile={name => this.handleOnCheckFile(name)}
       />
     ));
 
