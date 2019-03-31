@@ -7,41 +7,38 @@ import { ipcRenderer } from 'electron'
 
 ReactDOM.render(<Home />, document.getElementById('root'));
 
-var base = document.getElementsByClassName('card');
-var holder = document.getElementById('favorites');
+let fromElement = document.getElementsByClassName('card');
+let toElementFav = document.getElementById('favorites');
+let toElementChk = document.getElementById('checked');
 
-base = Array.prototype.slice.call(base);
-base.forEach(element => {
+fromElement = Array.prototype.slice.call(fromElement);
+fromElement.forEach(element => {
     element.ondragstart = function(e){
+        console.log(1);
         e.dataTransfer.effectAllowed = "move";
         e.dataTransfer.setData("text/plain", element.children[0].getAttribute('title'));
     };
 });
 
-/** hoverエリアにドラッグされた場合 */
-holder.ondragover = function () {  
+toElementFav.ondragover = function () {  
   return false;
 };
 
-/** hoverエリアから外れた or ドラッグが終了した */
-holder.ondragleave = holder.ondragend = function (e) {
-
-    // console.log('holder.ondragleave = holder.ondragend');
-    // console.dir(e);
-    // e.dataTransfer.setData('text', this.id);
-
-  
+toElementFav.ondrop = function (e) {
+  e.preventDefault();
+  console.log(2);
+  ipcRenderer.send('drop-file1', e.dataTransfer.getData("text/plain"))
   return false;
 };
-/** hoverエリアにドロップされた */
-holder.ondrop = function (e) {
-  e.preventDefault(); // イベントの伝搬を止めて、アプリケーションのHTMLとファイルが差し替わらないようにする
 
-  console.log('holder.ondrop');
-  console.log(e.dataTransfer.getData("text/plain"));
-  console.dir(e);
-
-  ipcRenderer.send('drop-file', e.dataTransfer.getData("text/plain"))
-
+toElementChk.ondragover = function () {  
   return false;
 };
+
+toElementChk.ondrop = function (e) {
+  e.preventDefault();
+  console.log(3);
+  ipcRenderer.send('drop-file2', e.dataTransfer.getData("text/plain"))
+  return false;
+};
+

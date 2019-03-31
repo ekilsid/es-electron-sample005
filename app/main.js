@@ -70,7 +70,10 @@ app.on('activate', function() {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-ipcMain.on('drop-file', (event, arg) => {
-  console.log(arg)
-  event.sender.send('reply', arg);
+ipcMain.on('drop-file1', (event, arg) => {
+  event.sender.send('reply1', arg);
+})
+
+ipcMain.on('drop-file2', (event, arg) => {
+  event.sender.send('reply2', arg);
 })

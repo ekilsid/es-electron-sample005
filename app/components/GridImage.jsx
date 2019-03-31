@@ -36,10 +36,10 @@ class GridImage extends React.Component {
     console.log('[GridImage#render]');
     console.dir(this.props);
 
-    const thumbnail =  this.props.file.path + '/' + this.props.file.name;
+    const thumbnail = this.props.file.path + '/' + this.props.file.name;
 
     return (
-      <li className={`card ${this.props.selected ? 'selected' : ''}`}>
+      <li className={`card ${this.props.selected && 'selected'}`}>
         {this.props.file.isPhoto ? (
           <img
             draggable="true"
@@ -58,11 +58,11 @@ class GridImage extends React.Component {
           />
         )}
         <div>
-        <FontAwesome
-          className={`card-action ${this.props.selected ? 'selected' : ''}`}
-          name="check-circle"
-          onClick={() => this.props.onCheckFile(this.props.file.name)}
-        />
+          <FontAwesome
+            className={`card-action ${this.props.selected && 'selected'}`}
+            name="check-circle"
+            onClick={() => this.props.onCheckFile(this.props.file.name)}
+          />
         </div>
       </li>
     );

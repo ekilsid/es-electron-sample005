@@ -19,20 +19,26 @@ export default class Home extends React.Component {
       photos: [],
       selected: [],
       list1: [],
-      list2: ['xxx', 'yyy']
+      list2: []
     };
 
     this.handleOnCheckFile = this.handleOnCheckFile.bind(this);
 
-    ipcRenderer.on('reply', (event, arg) => {
-      console.log('reply!!! -> ' + arg);
-      if(this.state.list1.indexOf(arg) == -1){
+    ipcRenderer.on('reply1', (event, arg) => {
+      if (this.state.list1.indexOf(arg) == -1) {
         this.setState({
           list1: this.state.list1.concat([arg])
-        });  
+        });
       }
     });
 
+    ipcRenderer.on('reply2', (event, arg) => {
+      if (this.state.list2.indexOf(arg) == -1) {
+        this.setState({
+          list2: this.state.list2.concat([arg])
+        });
+      }
+    });
   }
 
   componentDidMount() {
@@ -112,7 +118,7 @@ export default class Home extends React.Component {
           >
             <button
               className="btn btn-default"
-              style={{ width: '65px', cursor: 'pointer', float: 'left' }}
+              style={{ width: '65px', float: 'left' }}
               onClick={() => this.handleOpen()}
             >
               <span className="icon icon-folder" /> Open
@@ -122,10 +128,11 @@ export default class Home extends React.Component {
         </header>
         <div className="window-content">
           <div className="pane-group">
-            <div className="pane" style={{minWidth:'400px'}}>
+            <div className="pane" style={{ minWidth: '400px' }}>
               <ul className="gallery">{GalleryContents}</ul>
             </div>
             <div className="pane-sm sidebar">
+              <h5>Drag and drop in here.</h5>
               <nav id="favorites" className="nav-group area-drop">
                 <h5 className="nav-group-title">Favorites</h5>
                 {List1}
