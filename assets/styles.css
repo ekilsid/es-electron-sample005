@@ -65,3 +65,7 @@
 .area-drop:hover {
   color: blue;
 }
+
+.dragging {
+  border-color: blue;
+}

@@ -34,8 +34,8 @@ class GridImage extends React.Component {
   }
 
   render() {
-    console.log('[GridImage#render]');
-    console.dir(this.props);
+    // console.log('[GridImage#render]');
+    // console.dir(this.props);
 
     const thumbnail = this.props.file.path + '/' + this.props.file.name;
 

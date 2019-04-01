@@ -72,8 +72,18 @@ app.on('activate', function() {
 
 ipcMain.on('drop-file1', (event, arg) => {
   event.sender.send('reply1', arg);
-})
+});
 
 ipcMain.on('drop-file2', (event, arg) => {
   event.sender.send('reply2', arg);
-})
+});
+
+ipcMain.on('dragging', (event, arg) => {
+  event.sender.send('reply3', arg);
+});
+
+ipcMain.on('leaving', (event, arg) => {
+  event.sender.send('reply3', '');
+});
+
+

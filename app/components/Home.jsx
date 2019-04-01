@@ -18,7 +18,9 @@ export default class Home extends React.Component {
       photos: [],
       selected: [],
       list1: [],
-      list2: []
+      list2: [],
+      dragging1: '',
+      dragging2: ''
     };
 
     this.handleOnCheckFile = this.handleOnCheckFile.bind(this);
@@ -26,7 +28,12 @@ export default class Home extends React.Component {
     ipcRenderer.on('reply1', (event, arg) => {
       if (this.state.list1.indexOf(arg) == -1) {
         this.setState({
-          list1: this.state.list1.concat([arg])
+          list1: this.state.list1.concat([arg]),
+          dragging1: '',
+        });
+      }else{
+        this.setState({
+          dragging1: '',
         });
       }
     });
@@ -34,10 +41,46 @@ export default class Home extends React.Component {
     ipcRenderer.on('reply2', (event, arg) => {
       if (this.state.list2.indexOf(arg) == -1) {
         this.setState({
-          list2: this.state.list2.concat([arg])
+          list2: this.state.list2.concat([arg]),
+          dragging2: '',
+        });
+      }else{
+        this.setState({
+          dragging2: '',
         });
       }
     });
+
+    ipcRenderer.on('reply3', (event, arg) => {
+      console.log('reply3 : ' + arg);
+
+      switch(arg){
+        case 'favorites' :{
+          console.log('1111');
+          this.setState({
+            dragging1: 'dragging',
+            //dragging2: '',      
+          });
+          break;
+        }
+        case 'checked':{
+          console.log('2222');
+          this.setState({
+            //dragging1: '', 
+            dragging2: 'dragging',    
+          });
+          break;
+        }
+        default:
+          console.log('333');
+          this.setState({
+            dragging1: '', 
+            dragging2: '',    
+          });
+          break;
+      }
+    });
+      
   }
 
   componentDidMount() {
@@ -132,11 +175,11 @@ export default class Home extends React.Component {
             </div>
             <div className="pane-sm sidebar">
               <h5>Drag and drop in here.</h5>
-              <nav id="favorites" className="nav-group area-drop">
+              <nav id="favorites" className={`nav-group area-drop ${this.state.dragging1}`}>
                 <h5 className="nav-group-title">Favorites</h5>
                 {List1}
               </nav>
-              <nav id="checked" className="nav-group area-drop">
+              <nav id="checked" className={`nav-group area-drop ${this.state.dragging2}`}>
                 <h5 className="nav-group-title">Checked</h5>
                 {List2}
               </nav>
