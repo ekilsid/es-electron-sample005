@@ -14,8 +14,7 @@ export default class Home extends React.Component {
     console.log('[Top#constructor]');
 
     this.state = {
-      //path: app.getPath('home'),
-      path: '/Users/takano/Dev/PicTest',
+      path: app.getPath('home'),
       photos: [],
       selected: [],
       list1: [],
