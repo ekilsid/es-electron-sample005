@@ -36,9 +36,8 @@ toElementFav.ondragleave = function (e) {
 };
 
 
-toElementFav.ondragover = function () {  
-  //console.log('ondragover1');
-  return false;
+toElementFav.ondragover = function (e) {  
+  e.preventDefault();
 };
 
 toElementFav.ondrop = function (e) {
@@ -49,6 +48,7 @@ toElementFav.ondrop = function (e) {
 };
 
 toElementChk.ondragenter = function (e) {  
+  e.preventDefault();
   console.log('ondragenter2');
   ipcRenderer.send('dragging', 'checked');
   return false;
@@ -61,10 +61,8 @@ toElementChk.ondragleave = function (e) {
   return false;
 };
 
-
-toElementChk.ondragover = function () {  
-  //console.log('ondragover2');
-  return false;
+toElementChk.ondragover = function (e) {  
+  e.preventDefault();
 };
 
 toElementChk.ondrop = function (e) {

@@ -176,11 +176,11 @@ export default class Home extends React.Component {
             <div className="pane-sm sidebar">
               <h5>Drag and drop in here.</h5>
               <nav id="favorites" className={`nav-group area-drop ${this.state.dragging1}`}>
-                <h5 className="nav-group-title">Favorites</h5>
+                <h5 className="nav-group-title"　style={{pointerEvents:'none'}} >Favorites</h5>
                 {List1}
               </nav>
               <nav id="checked" className={`nav-group area-drop ${this.state.dragging2}`}>
-                <h5 className="nav-group-title">Checked</h5>
+                <h5 className="nav-group-title"　style={{pointerEvents:'none'}} >Checked</h5>
                 {List2}
               </nav>
             </div>
