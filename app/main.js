@@ -37,12 +37,7 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-
-
-  mainWindow.on('drop', function() {
-    console.log('addEventListener drop');
-  });
-
+  
 }
 
 // This method will be called when Electron has finished
